@@ -38,6 +38,9 @@
     .game-card.flip {
       transform: rotateY(180deg);
     }
+    .game-card.disabled {
+      display: none;
+    } 
   .frontside,
   .backside {
     width: 100%;
