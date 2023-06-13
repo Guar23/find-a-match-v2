@@ -1,63 +1,124 @@
-const cards = document.querySelectorAll('.game-card');
+var myCards = document.getElementById('container');
+var resultsArray = [];
+var counter = 0;
+var text = document.getElementById('text');
+var seconds = 0;
+var tens = 0;
+var appendTens = document.getElementById("tens");
+var appendSeconds = document.getElementById("seconds");
+var buttonPause = document.getElementById('button-pause');
 
-let CardIsFlipped = false;
-let lockBoard = false;
-let firstCard, secondCard;
+var Interval ;
+var images = [
+    '1', '2', '3', '4', '5', '6', '7', '8',  '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'
+];
 
-function flipCard() {
-  if (lockBoard) return;
-  if (this === firstCard) return;
+var clone = images.slice(0); // duplicate array
+var cards = images.concat(clone); // merge to arrays
 
-  this.classList.add('flip');
+// Shufffel function
+function shuffle(o){
+  for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i],   o[i] = o[j], o[j] = x);
+  return o;
+}
+shuffle(cards);
 
-  if (!CardIsFlipped) {
-    CardIsFlipped = true;
-    firstCard = this;
+for (var i = 0; i < cards.length; i++) {
+  card = document.createElement('div');
+  card.dataset.item = cards[i];
+  card.dataset.view = "card";
+  myCards.appendChild(card);
 
-    return;
+  card.onclick = function () {
+    if (this.className != 'flipped' && this.className != 'correct'){
+        this.className = 'flipped';
+        var result = this.dataset.item;
+        resultsArray.push(result);
+        clearInterval(Interval);
+        Interval = setInterval(startTimer, 10);
+    }
+
+
+    if (resultsArray.length > 1) {
+      if (resultsArray[0] === resultsArray[1]) {
+        check("correct");
+        counter ++;
+        win();
+        resultsArray = [];
+      } else {
+        check("reverse");
+        resultsArray = [];
+      }
+
+    }
+
   }
 
-  secondCard = this;
+};
 
-  checkForMatch();
+var check = function(className) {
+  var x = document.getElementsByClassName("flipped");
+
+  setTimeout(function() {
+
+    for(var i = (x.length - 1); i >= 0; i--) {
+      x[i].className = className;
+    }
+
+  },500);
+
 }
 
-function checkForMatch() {
-  if (firstCard.dataset.number === secondCard.dataset.number){
-  return disableCards();
- } else{
-  return unflipCards();
- }
+var win = function () {
+
+  if(counter === 18) {
+    clearInterval(Interval);
+      text.innerHTML = "Вы победили за ";
+  }
+
+}
+function change_color(obj)
+{
+    obj.value && (document.body.style.backgroundColor = obj.value);
 }
 
-function disableCards() {
-  firstCard.removeEventListener('click', flipCard);
-  secondCard.removeEventListener('click', flipCard);
-
-  resetBoard();
+buttonPause.onclick = function() {
+    clearInterval(Interval);
 }
 
-function unflipCards() {
-  lockBoard = true;
 
-  setTimeout(() => {
-    firstCard.classList.remove('flip');
-    secondCard.classList.remove('flip');
+function startTimer () {
+  tens++;
 
-    resetBoard();
-  }, 1000);
+  if(tens < 9){
+    appendTens.innerHTML = "0" + tens;
+  }
+
+  if (tens > 9){
+    appendTens.innerHTML = tens;
+
+  }
+
+  if (tens > 99) {
+    seconds++;
+    appendSeconds.innerHTML = "0" + seconds;
+    tens = 0;
+    appendTens.innerHTML = "0" + 0;
+  }
+
+  if (seconds > 9){
+    appendSeconds.innerHTML = seconds;
+  }
+
 }
 
-function resetBoard() {
-  [hasFlippedCard, lockBoard] = [false, false];
-  [firstCard, secondCard] = [null, null];
-}
 
-(function shuffle() {
-  cards.forEach(card => {
-    let randomPos = Math.floor(Math.random() * 12);
-    card.style.order = randomPos;
-  });
-})();
 
-cards.forEach(card => card.addEventListener('click', flipCard));
+
+
+
+
+
+
+
+
