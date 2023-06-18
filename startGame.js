@@ -9,6 +9,7 @@ const cardsArray = createMemeArray(difficult);
 const duplicatedCardsArray = duplicateArray(cardsArray);
 let resultsArray = [];
 let counter = 0;
+let clickable = true;
 
     gameSection.innerHTML = '';
     restartBtn.textContent = 'Рестарт';
@@ -28,10 +29,17 @@ for (var i = 0; i < duplicatedCardsArray.length; i++) {
     
         card.onclick = function () {
         if (this.className != 'flipped' && this.className != 'correct'){
-            this.className = 'flipped';
-            var result = this.dataset.item;
-            resultsArray.push(result);
-        }
+            clickableCheck ();
+              if (clickable === true){
+                this.className = 'flipped';
+               let result = this.dataset.item;
+               resultsArray.push(result);
+             } else{
+               console.log("Попытка перевернуть больше 3 карт");
+               return;
+               }
+            
+        } 
     
         if (resultsArray.length > 1) {
           if (resultsArray[0] === resultsArray[1]) {
@@ -42,17 +50,27 @@ for (var i = 0; i < duplicatedCardsArray.length; i++) {
           } else {
             check("reverse");
             resultsArray = [];
+            
           }
-    
+
         }
     
       }
-    
+
     };
-    
+
+    const clickableCheck = function(){
+      let x = document.getElementsByClassName("flipped");
+      if (x.length === 2){
+       clickable = false;
+      } else{
+        clickable = true;
+      }
+    }
+
     const check = function(className) {
       let x = document.getElementsByClassName("flipped");
-    
+     
       setTimeout(function() {
     
         for(var i = (x.length - 1); i >= 0; i--) {

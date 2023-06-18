@@ -1,28 +1,24 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background: #ffdead;
-  font-family: 'Tinos', serif;
-  font-size: 1.5em;
+  background-image: url(./img/background\ red.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: 'Nunito', sans-serif;
   text-align: center;
   color: #000000;
 }
 
 h1 {
-  font-weight: 200;
-  font-size: 2.2em;
+  font-size: 40px;
+  padding: 20px;
+  color: #4f0000;
 }
-
-.button1 {background-color: #ffdead;} /* Navajo white */
-.button2 {background-color: pink}
-.button3 {background-color: orange}
-.button4 {background-color: skyblue;}
-.button5 {background-color: #686868;}
-
-div {
-  width:445px;
-  margin: auto;
-}
-
-
 
 .game-section__container {
   display: flex;
@@ -35,7 +31,7 @@ div {
   margin: 0;
   margin-bottom: 15px;
   text-align: center;
-  color: #fff;
+  color: #4f0000;
 }
 
 .game-menu__difficult-btn,
@@ -43,11 +39,8 @@ div {
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  border: none;
-  margin: 0;
-  padding: 0;
+  border-color: #4f0000;
   background: transparent;
-  color: #222;
   transition: background-color .3s ease-in-out, color .3s ease-in-out;
 }
 
@@ -58,7 +51,9 @@ div {
 .game-menu__difficult-btn,
 .restart-btn {
   padding: 15px 20px;
-  background-color: #5dc6ff;
+  background-color: #ffffff61;
+  border-radius: 20%;
+  color: #4f0000;
 }
 
 .game-menu__difficult-btn:hover {
@@ -68,31 +63,14 @@ div {
 }
 
 .game-table {
-  max-width: 500px;
-  display: inline-flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
   justify-content: center;
+  grid-auto-flow: column;
+  padding: 50px;
+  gap: 10px;
 }
 
-
-
-.six {
-  width: 445px;
-  margin: auto;
-  align-items: center;
-}
-
-.eight {
-  width: 600px;
-  margin: auto;
-  align-items: center;
-}
-
-.ten {
-  width: 800px;
-  margin: auto;
-  align-items: center;
-}
 
 [data-view="card"] {
   transform: rotateY(180deg);
@@ -105,6 +83,7 @@ div {
   background-color: bisque;
   background-size: contain;
   border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(145 2 2 / 50%);
 }
 
 .flipped {
@@ -112,6 +91,7 @@ div {
   transform-style: preserve-3d;
   position: relative;
   transform: rotateY(0deg);
+  box-shadow: none;
 }
 
 .reverse {
