@@ -22,6 +22,60 @@ div {
   margin: auto;
 }
 
+
+
+.game-section__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-menu__title {
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #fff;
+}
+
+.game-menu__difficult-btn,
+.restart-btn {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: #222;
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
+}
+
+.game-menu__difficult-btn:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.game-menu__difficult-btn,
+.restart-btn {
+  padding: 15px 20px;
+  background-color: #5dc6ff;
+}
+
+.game-menu__difficult-btn:hover {
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
+  background-color: #222;
+  color: #fff;
+}
+
+.game-table {
+  max-width: 500px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
 .six {
   width: 445px;
   margin: auto;
